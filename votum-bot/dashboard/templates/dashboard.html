@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Votum{% endblock %}
+
+{% block content %}
+  <h2 class="text-2xl font-semibold mb-4">Welcome, {{ user.username }}!</h2>
+  <p>This is a minimal dashboard for the Votum bot.  In a full implementation you would list councils, active motions and statistics here.</p>
+  <p>Use the Discord bot slash commands to create councils and motions.  Refresh this page to see updates.</p>
+{% endblock %}

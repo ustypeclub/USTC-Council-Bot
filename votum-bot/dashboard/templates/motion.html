@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Motion | Votum{% endblock %}
+
+{% block content %}
+  <h2 class="text-2xl font-semibold mb-4">Motion {{ motion.id }}</h2>
+  <p>{{ motion.text }}</p>
+  <p>Proposer: {{ motion.author_id }}</p>
+  <h3 class="text-xl font-semibold mt-4">Votes</h3>
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead>
+      <tr>
+        <th class="px-3 py-2 text-left">User ID</th>
+        <th class="px-3 py-2 text-left">Vote</th>
+        <th class="px-3 py-2 text-left">Reason</th>
+        <th class="px-3 py-2 text-left">Weight</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {% for vote in votes %}
+      <tr>
+        <td class="px-3 py-1">{{ vote.user_id }}</td>
+        <td class="px-3 py-1">{{ vote.vote }}</td>
+        <td class="px-3 py-1">{{ vote.reason }}</td>
+        <td class="px-3 py-1">{{ vote.weight }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <script>
+    // Connect to WebSocket for live tallies
+    const ws = new WebSocket(`ws://${window.location.host}/ws/tally`);
+    ws.onmessage = (event) => {
+      console.log(event.data);
+    };
+  </script>
+{% endblock %}

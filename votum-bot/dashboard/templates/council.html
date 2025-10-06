@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Council | Votum{% endblock %}
+
+{% block content %}
+  <h2 class="text-2xl font-semibold mb-4">Council {{ council.name }}</h2>
+  <p>Council ID: {{ council.id }}</p>
+  <h3 class="text-xl font-semibold mt-4">Configuration</h3>
+  <pre class="bg-gray-100 p-2 rounded">{{ configs | tojson(indent=2) }}</pre>
+  <h3 class="text-xl font-semibold mt-4">Active Motion</h3>
+  {% if motion %}
+    <p>{{ motion.text }}</p>
+    <p>Proposer: {{ motion.author_id }}</p>
+  {% else %}
+    <p>No active motion.</p>
+  {% endif %}
+{% endblock %}
